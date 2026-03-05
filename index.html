@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Everyday Crew — Premium Crew Socks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --linen:      #F7F3EE;
+      --warm-white: #FDFAF6;
+      --brown:      #3D342A;
+      --mid-brown:  #6B5D52;
+      --tan:        #C4AB90;
+      --soft-tan:   #E8DDD2;
+      --line:       #E0D6CC;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--brown);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 56px;
+      background: rgba(253,250,246,0.9);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo img { height: 34px; width: auto; }
+    .nav-links { display: flex; gap: 44px; list-style: none; }
+    .nav-links a {
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--mid-brown); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--brown); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 60px;
+      background: var(--linen);
+    }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 30px;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.3s;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(50px, 5.5vw, 82px);
+      font-weight: 300; line-height: 1.08; letter-spacing: -0.01em;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+    .hero-title em { font-style: italic; color: var(--tan); }
+    .hero-body {
+      margin-top: 28px; font-size: 15px; line-height: 1.85;
+      color: var(--mid-brown); max-width: 380px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+    .hero-actions {
+      margin-top: 44px; display: flex; align-items: center; gap: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+    .btn {
+      display: inline-block; padding: 13px 32px;
+      font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 400;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; transition: all 0.25s;
+    }
+    .btn-dark { background: var(--brown); color: var(--warm-white); }
+    .btn-dark:hover { background: var(--mid-brown); }
+    .btn-ghost { color: var(--mid-brown); border-bottom: 1px solid var(--tan); padding-left: 0; padding-right: 0; }
+    .btn-ghost:hover { color: var(--brown); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      opacity: 0; animation: fadeIn 1.2s ease forwards 0.2s;
+    }
+    .hero-right img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-badge {
+      position: absolute; bottom: 32px; left: 32px;
+      background: rgba(253,250,246,0.93); padding: 16px 22px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-badge span {
+      display: block; font-size: 10px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--tan);
+    }
+    .hero-badge strong {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 400; color: var(--brown); margin-top: 4px;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap { overflow: hidden; padding: 15px 0; background: var(--brown); }
+    .marquee-track {
+      display: flex; gap: 52px; white-space: nowrap;
+      animation: marquee 22s linear infinite;
+    }
+    .marquee-track span {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38); flex-shrink: 0;
+    }
+    .marquee-track span.hi { color: rgba(255,255,255,0.82); }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* STORY */
+    .story { display: grid; grid-template-columns: 1fr 1fr; }
+    .story-img { position: relative; overflow: hidden; min-height: 580px; }
+    .story-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .story-img:hover img { transform: scale(1.04); }
+    .story-content {
+      padding: 100px 64px; background: var(--linen);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .section-tag {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--tan); margin-bottom: 28px;
+    }
+    .story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 3.2vw, 48px); font-weight: 300; line-height: 1.22;
+    }
+    .story-title em { font-style: italic; color: var(--tan); }
+    .story-text { margin-top: 28px; font-size: 15px; line-height: 1.88; color: var(--mid-brown); }
+    .story-text p + p { margin-top: 18px; }
+    .story-pull {
+      margin-top: 36px; padding: 24px 28px;
+      border-left: 2px solid var(--tan);
+      background: rgba(196,171,144,0.1);
+    }
+    .story-pull p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; font-style: italic; font-weight: 300; line-height: 1.65; color: var(--brown);
+    }
+
+    /* PACKAGING */
+    .packaging { display: grid; grid-template-columns: 1fr 1fr; }
+    .packaging-content {
+      padding: 100px 64px; background: var(--warm-white);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .packaging-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3vw, 44px); font-weight: 300; line-height: 1.22; margin-bottom: 20px;
+    }
+    .packaging-title em { font-style: italic; color: var(--tan); }
+    .packaging-text { font-size: 15px; line-height: 1.88; color: var(--mid-brown); max-width: 400px; }
+    .packaging-img {
+      overflow: hidden;
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .packaging-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+    .packaging-img:hover img { transform: scale(1.04); }
+
+    /* PRODUCT / COLORS */
+    .product-section { padding: 100px 56px; background: var(--linen); border-top: 1px solid var(--line); }
+    .product-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+    .product-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 56px); font-weight: 300; line-height: 1.1;
+    }
+    .product-title em { font-style: italic; color: var(--tan); }
+    .product-sub { font-size: 14px; line-height: 1.75; color: var(--mid-brown); max-width: 260px; text-align: right; }
+
+    .color-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .color-card { position: relative; overflow: hidden; border-radius: 2px; }
+    .color-card img { width: 100%; height: 420px; object-fit: cover; transition: transform 0.7s ease; display: block; }
+    .color-card:hover img { transform: scale(1.04); }
+    .color-card-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 28px 26px;
+      background: linear-gradient(to top, rgba(61,52,42,0.65) 0%, transparent 100%);
+    }
+    .color-card-label span { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.65); }
+    .color-card-label strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #fff; margin-top: 4px; }
+
+    /* SPECS */
+    .specs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); margin-top: 60px; }
+    .spec { padding: 44px 28px; border-right: 1px solid var(--line); text-align: center; }
+    .spec:last-child { border-right: none; }
+    .spec-val { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 300; color: var(--brown); line-height: 1; }
+    .spec-lbl { margin-top: 8px; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); }
+
+    /* FOOTER */
+    footer { background: var(--brown); padding: 64px 56px; }
+    .footer-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-bottom: 36px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); opacity: 0.8; }
+    .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-style: italic; font-weight: 300; color: rgba(255,255,255,0.45); }
+    .footer-nyc { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.28); text-align: right; line-height: 1.8; }
+    .footer-copy { margin-top: 26px; font-size: 11px; color: rgba(255,255,255,0.22); letter-spacing: 0.06em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.85s ease, transform 0.85s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 56px 24px; }
+      .hero-right { height: 60vw; }
+      .story { grid-template-columns: 1fr; }
+      .story-img { min-height: 280px; }
+      .story-content { padding: 56px 24px; }
+      .packaging { grid-template-columns: 1fr; }
+      .packaging-content { padding: 56px 24px; }
+      .packaging-img { height: 280px; }
+      .product-section { padding: 60px 24px; }
+      .product-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .product-sub { text-align: left; }
+      .color-grid { grid-template-columns: 1fr; }
+      .color-card img { height: 300px; }
+      .specs { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 48px 24px; }
+      .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+      .footer-nyc { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo_2.png" alt="Everyday Crew" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#story">Story</a></li>
+      <li><a href="#product">The Sock</a></li>
+      <li><a href="#packaging">Packaging</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Designed in NYC &nbsp;·&nbsp; Premium Crew Socks</p>
+      <h1 class="hero-title">
+        Wear it<br>
+        <em>every</em><br>
+        day.
+      </h1>
+      <p class="hero-body">
+        Premium socks built for comfort, durability, and the kind of clean design that works with everything you already own.
+      </p>
+      <div class="hero-actions">
+        <a href="#story" class="btn btn-dark">Our Story</a>
+        <a href="#product" class="btn btn-ghost">See the Sock →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="logo_ambient.png" alt="Everyday Crew — Premium Crew Socks" />
+      <div class="hero-badge">
+        <span>All-Season Comfort</span>
+        <strong>Premium Crew Socks</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="hi">83% Cotton</span><span>·</span>
+      <span>Arch Support</span><span>·</span>
+      <span class="hi">Reinforced Heel & Toe</span><span>·</span>
+      <span>6 Colorways</span><span>·</span>
+      <span class="hi">Designed in NYC</span><span>·</span>
+      <span>All-Season Comfort</span><span>·</span>
+      <span class="hi">Wash With Care</span><span>·</span>
+      <span>Premium Construction</span><span>·</span>
+      <span class="hi">83% Cotton</span><span>·</span>
+      <span>Arch Support</span><span>·</span>
+      <span class="hi">Reinforced Heel & Toe</span><span>·</span>
+      <span>6 Colorways</span><span>·</span>
+      <span class="hi">Designed in NYC</span><span>·</span>
+      <span>All-Season Comfort</span><span>·</span>
+      <span class="hi">Wash With Care</span><span>·</span>
+      <span>Premium Construction</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section class="story" id="story">
+    <div class="story-img reveal">
+      <img src="Wash_With_Care_1.png" alt="Everyday Crew mesh laundry bag" />
+    </div>
+    <div class="story-content reveal">
+      <p class="section-tag">Our Story</p>
+      <h2 class="story-title">
+        The things you wear every day should be the <em>best things</em> you own.
+      </h2>
+      <div class="story-text">
+        <p>Most basics aren't that basic. You're either paying too much for a name, or settling for something that falls apart after a few washes.</p>
+        <p>Everyday Crew was built on a simple idea: quality shouldn't be a luxury. Soft enough to forget you're wearing them. Durable enough to actually last. Minimal enough to go with anything.</p>
+        <p>We started with socks — because if you're going to get one thing right, start at the foundation. More everyday essentials are on the way.</p>
+      </div>
+      <div class="story-pull">
+        <p>"Start at the foundation. Get that right, and everything else follows."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGING -->
+  <section class="packaging" id="packaging">
+    <div class="packaging-content reveal">
+      <p class="section-tag">The Details</p>
+      <h2 class="packaging-title">
+        Packaged to<br><em>last.</em>
+      </h2>
+      <p class="packaging-text">
+        Every pair comes in a premium mesh laundry bag — not just packaging, but something you'll actually use. Toss it in the wash, protect your socks, and make the quality last longer.
+      </p>
+      <br>
+      <p class="packaging-text" style="margin-top: 8px; font-size: 13px; color: var(--tan); letter-spacing: 0.06em;">
+        Everyday Crew &nbsp;·&nbsp; Wash With Care &nbsp;·&nbsp; Premium Crew Socks
+      </p>
+    </div>
+    <div class="packaging-img reveal">
+      <img src="Wash_With_Care_2.png" alt="Everyday Crew packaging lineup" />
+    </div>
+  </section>
+
+  <!-- PRODUCT / COLORS -->
+  <section class="product-section" id="product">
+    <div class="product-header reveal">
+      <h2 class="product-title">
+        Six colors.<br><em>Endless fits.</em>
+      </h2>
+      <p class="product-sub">
+        Warm neutrals and clean urbans — built to disappear into your wardrobe and work with everything.
+      </p>
+    </div>
+
+    <div class="color-grid reveal">
+      <div class="color-card">
+        <img src="warm_colors.png" alt="Warm colorways — Crème, Light Tan, Coffee" />
+        <div class="color-card-label">
+          <span>Warm Tones</span>
+          <strong>Crème · Light Tan · Coffee</strong>
+        </div>
+      </div>
+      <div class="color-card">
+        <img src="cool_colors.png" alt="Urban colorways — Heather Grey, Grey, Black" />
+        <div class="color-card-label">
+          <span>Urban Tones</span>
+          <strong>Heather Grey · Grey · Black</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="specs reveal">
+      <div class="spec">
+        <p class="spec-val">83%</p>
+        <p class="spec-lbl">Premium Cotton</p>
+      </div>
+      <div class="spec">
+        <p class="spec-val">15%</p>
+        <p class="spec-lbl">Polyester</p>
+      </div>
+      <div class="spec">
+        <p class="spec-val">2%</p>
+        <p class="spec-lbl">Spandex</p>
+      </div>
+      <div class="spec">
+        <p class="spec-val">6</p>
+        <p class="spec-lbl">Colorways</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="logo_text.png" alt="Everyday Crew" />
+      </div>
+      <p class="footer-tagline">Quality basics. No compromise.</p>
+      <p class="footer-nyc">Designed in NYC<br>Est. 2025</p>
+    </div>
+    <p class="footer-copy">© 2025 Everyday Crew. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
